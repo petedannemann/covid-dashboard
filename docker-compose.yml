@@ -1,0 +1,13 @@
+version: '3'
+services:
+    postgres:
+        image: postgres:9.6
+        restart: always
+        environment:
+            - POSTGRES_USER=covid
+            - POSTGRES_PASSWORD=covid
+            - POSTGRES_DB=covid
+            # persist data on the local filesystem.
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data/pgdata
