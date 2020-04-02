@@ -12,5 +12,5 @@ virtualenv: ./singer-io/env/bin/activate
 singer-catalog: virtualenv
 	tap-covid-19 --config singer-io/covid_config.json --discover > singer-io/catalog.json
 
-singer-sync: docker-up virtualenv
-	tap-covid-19 --config singer-io/covid_config.json | target-postgres --config singer-io/postgres_config.json >> singer-io/state.json
+singer-sync: virtualenv
+	tap-covid-19 --config singer-io/covid_config.json --catalog singer-io/catalog.json --state singer-io/state.json | target-postgres --config singer-io/postgres_config.json > singer-io/state.json
