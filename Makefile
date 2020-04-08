@@ -24,3 +24,7 @@ singer-sync: virtualenv
 # clojure
 start-backend:
 	cd backend && lein ring server-headless
+
+# react
+start-frontend:
+	cd frontend && npm start

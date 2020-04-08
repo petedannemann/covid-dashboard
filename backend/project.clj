@@ -7,7 +7,8 @@
                  [compojure "1.6.1"]
                  [org.postgresql/postgresql "42.1.4"]
                  [ring/ring-defaults "0.3.2"]
-                 [ring/ring-json "0.5.0"]]
+                 [ring/ring-json "0.5.0"]
+                 [ring-cors "0.1.13"]]
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler backend.handler/app}
   :profiles

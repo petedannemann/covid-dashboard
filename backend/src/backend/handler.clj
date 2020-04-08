@@ -2,6 +2,7 @@
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
+            [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.json :as middleware]
             [ring.util.response :refer [response]]
             [backend.db :refer [get-counties]]))
@@ -17,4 +18,5 @@
   (-> (handler/api app-routes)
       (middleware/wrap-json-body)
       (middleware/wrap-json-params)
-      (middleware/wrap-json-response)))
+      (middleware/wrap-json-response)
+      (wrap-cors :access-control-allow-origin [#".*"] :access-control-allow-methods [:get])))

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import './App.css';
 
-const CASES_BY_COUNTY_URL = 'https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Cases_by_country_pt_V3/FeatureServer';
+const CASES_BY_COUNTY_URL = 'http://localhost:3000/counties';
 
 class App extends Component {
   state = {
@@ -17,7 +17,7 @@ class App extends Component {
       .then(response => {
         this.setState(
           {
-            data: response.data,
+            data: response.data.body,
             isLoading: false,
           });
       })
