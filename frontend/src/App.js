@@ -49,9 +49,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.isLoading}
-        <Indicator number={this.state.caseCount} text={"Total Cases"}/>
-        <Indicator number={this.state.deathCount} text={"Total Deaths"}/>
+        <h1>COVID-19 Dashboard</h1>
+        <div id="indicator-container">
+          <Indicator number={this.state.caseCount} text={"Total Cases"} id="indicator-cases"/>
+          <Indicator number={this.state.deathCount} text={"Total Deaths"} id="indicator-deaths"/>
+        </div>
       </div>
     );
   }
