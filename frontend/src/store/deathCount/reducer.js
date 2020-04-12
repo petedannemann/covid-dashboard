@@ -1,6 +1,6 @@
-import { REQUEST_CASE_COUNT, RECEIVE_CASE_COUNT } from './actionCreators'
+import { REQUEST_DEATH_COUNT, RECEIVE_DEATH_COUNT } from './actionCreators'
 
-const caseCount = (
+const deathCount = (
   state = {
     isFetching: false,
     number: null
@@ -8,18 +8,18 @@ const caseCount = (
   action
 ) => {
   switch (action.type) {
-    case REQUEST_CASE_COUNT:
+    case REQUEST_DEATH_COUNT:
       return Object.assign({}, state, {
         isFetching: true
       })
-    case RECEIVE_CASE_COUNT:
+    case RECEIVE_DEATH_COUNT:
       return Object.assign({}, state, {
         isFetching: false,
-        number: action.caseCount,
+        number: action.deathCount,
       })
     default:
       return state
   }
 }
 
-export default caseCount
+export default deathCount

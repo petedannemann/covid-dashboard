@@ -11,10 +11,12 @@ const indicator = props => {
     width: '20%'
   };
   
-  return (<div style={style}>
-          <h1>{props.number}</h1>
-          <h4>{props.text}</h4>
-          </div>)
+  return (
+      <div style={style}>
+        <h1>{props.number}</h1>
+        <h4>{props.text}</h4>
+      </div>
+  )
 };
 
 export default indicator

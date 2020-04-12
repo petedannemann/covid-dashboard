@@ -1,8 +1,14 @@
 import { combineReducers } from 'redux';
 
-const appReducer = combineReducers({});
+import caseCount from './caseCount/reducer';
+import deathCount from './deathCount/reducer';
 
-const reducer = (state, action) => {
+const appReducer = combineReducers({
+  caseCount,
+  deathCount
+});
+
+const rootReducer = (state, action) => {
   if (action.type === "RESET_STATE") {
     state = undefined;
   }
@@ -10,5 +16,5 @@ const reducer = (state, action) => {
   return appReducer(state, action);
 };
 
-export default reducer;
+export default rootReducer;
 
