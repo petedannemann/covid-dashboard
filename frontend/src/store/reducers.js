@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import caseCount from './caseCount/reducer';
-import deathCount from './deathCount/reducer';
+import caseCount from "./caseCount/reducer";
+import deathCount from "./deathCount/reducer";
 
 const appReducer = combineReducers({
   caseCount,
-  deathCount
+  deathCount,
 });
 
 const rootReducer = (state, action) => {
@@ -17,4 +17,3 @@ const rootReducer = (state, action) => {
 };
 
 export default rootReducer;
-
