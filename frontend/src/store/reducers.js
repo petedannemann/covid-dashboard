@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 
 import caseCount from "./caseCount/reducer";
+import casesByState from "./casesByState/reducer";
 import deathCount from "./deathCount/reducer";
 
 const appReducer = combineReducers({
   caseCount,
+  casesByState,
   deathCount,
 });
 

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { Bar } from "@nivo/bar";
+
 import { fetchCaseCountIfNeeded } from "../store/caseCount/actionCreators";
+import { fetchCasesByStateIfNeeded } from "../store/casesByState/actionCreators";
 import { fetchDeathCountIfNeeded } from "../store/deathCount/actionCreators";
+
 import Indicator from "../components/Indicator";
 
 import "./App.css";
@@ -12,17 +16,40 @@ class App extends Component {
     const { dispatch } = this.props;
     dispatch(fetchCaseCountIfNeeded());
     dispatch(fetchDeathCountIfNeeded());
+    dispatch(fetchCasesByStateIfNeeded());
+  }
+
+  totalCasesIndicator() {
+    return <Indicator number={this.props.caseCount.number} text="Total Cases" />
+  }
+
+  totalDeathsIndicator() {
+    return <Indicator number={this.props.deathCount.number} text="Total Deaths" />
+  }
+
+  casesByStateBarChart() {
+    return (
+    <div>
+        <Bar
+      data={this.props.casesByState.data}
+      keys={["number_of_cases"]}
+      indexBy="state"
+      height={300}
+      width={800}
+      colors={{ scheme: 'nivo' }}
+        />
+    </div>
+    )
   }
 
   render() {
-    const { caseCount, deathCount } = this.props;
-
     return (
       <div className="App">
         <h1>COVID-19 Dashboard</h1>
         <div id="indicator-container">
-          <Indicator number={caseCount.number} text="Total Cases" />
-          <Indicator number={deathCount.number} text="Total Deaths" />
+          {this.totalCasesIndicator()}
+          {this.totalDeathsIndicator()}
+          {this.casesByStateBarChart()}
         </div>
       </div>
     );
@@ -30,19 +57,11 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { caseCount, deathCount } = state || {
-    caseCount: {
-      isFetching: true,
-      number: null,
-    },
-    deathCount: {
-      isFetching: true,
-      number: null,
-    },
-  };
+  const { caseCount, casesByState, deathCount } = state
 
   return {
     caseCount,
+    casesByState,
     deathCount,
   };
 }

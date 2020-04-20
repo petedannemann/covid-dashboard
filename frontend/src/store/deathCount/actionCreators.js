@@ -12,7 +12,7 @@ const requestDeathCount = () => {
 const receiveDeathCount = (json) => {
   return {
     type: RECEIVE_DEATH_COUNT,
-    deathCount: json.data.body.death_count,
+    deathCount: json.data.death_count,
   };
 };
 

@@ -1,5 +1,6 @@
 (ns backend.db
-  (:require [clojure.java.jdbc :as jdbc]))
+  (:require [clojure.data.json :as json]
+            [clojure.java.jdbc :as jdbc]))
 
 ;; TODO: pull credentials from environment variables
 (def pg-db {:dbtype "postgres"
@@ -8,16 +9,23 @@
             :user "postgres"
             :password "postgres"})
 
-(defn get-counties []
-  (jdbc/query pg-db
-              ["select county, cases from covid.nytimes_us_counties"]))
-
 (defn get-case-count []
   (-> (jdbc/query pg-db
                   ["select sum(cases) as case_count from covid.nytimes_us_counties"])
-      (first)))
+      first))
 
 (defn get-death-count []
   (-> (jdbc/query pg-db
                   ["select sum(deaths) as death_count from covid.nytimes_us_counties"])
-      (first)))
+      first))
+
+(defn get-cases-by-state []
+  (->> (jdbc/query pg-db
+                   ["SELECT
+                       state,
+                       SUM(cases) AS number_of_cases
+                     FROM covid.nytimes_us_counties
+                     GROUP BY state
+                     ORDER BY number_of_cases"])))
+
+#_(map #(update-in % [:data] json/read-str))

@@ -12,7 +12,7 @@ const requestCaseCount = () => {
 const receiveCaseCount = (json) => {
   return {
     type: RECEIVE_CASE_COUNT,
-    caseCount: json.data.body.case_count,
+    caseCount: json.data.case_count,
   };
 };
 
