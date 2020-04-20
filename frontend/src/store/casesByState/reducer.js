@@ -12,7 +12,7 @@ const casesByState = (
       return Object.assign({}, state, {
         isFetching: true,
       });
-  case RECEIVE_CASES_BY_STATE:
+    case RECEIVE_CASES_BY_STATE:
       return Object.assign({}, state, {
         isFetching: false,
         data: action.data,

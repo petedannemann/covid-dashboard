@@ -20,26 +20,26 @@ class App extends Component {
   }
 
   totalCasesIndicator() {
-    return <Indicator number={this.props.caseCount.number} text="Total Cases" />
+    return <Indicator number={this.props.caseCount.number} text="Total Cases" />;
   }
 
   totalDeathsIndicator() {
-    return <Indicator number={this.props.deathCount.number} text="Total Deaths" />
+    return <Indicator number={this.props.deathCount.number} text="Total Deaths" />;
   }
 
   casesByStateBarChart() {
     return (
-    <div>
+      <div>
         <Bar
-      data={this.props.casesByState.data}
-      keys={["number_of_cases"]}
-      indexBy="state"
-      height={300}
-      width={800}
-      colors={{ scheme: 'nivo' }}
+          data={this.props.casesByState.data}
+          keys={["number_of_cases"]}
+          indexBy="state"
+          height={300}
+          width={800}
+          colors={{ scheme: "nivo" }}
         />
-    </div>
-    )
+      </div>
+    );
   }
 
   render() {
@@ -57,7 +57,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { caseCount, casesByState, deathCount } = state
+  const { caseCount, casesByState, deathCount } = state;
 
   return {
     caseCount,

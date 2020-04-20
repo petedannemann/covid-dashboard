@@ -13,7 +13,7 @@ const caseCount = (
         isFetching: true,
       });
     case RECEIVE_CASE_COUNT:
-    return Object.assign({}, state, {
+      return Object.assign({}, state, {
         isFetching: false,
         number: action.caseCount,
       });

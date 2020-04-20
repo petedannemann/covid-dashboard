@@ -20,9 +20,8 @@ const fetchCasesByState = () => {
   return (dispatch) => {
     dispatch(requestCasesByState);
     return axios.get("/cases-by-state").then((json) => {
-      dispatch(receiveCasesByState(json))
+      dispatch(receiveCasesByState(json));
     });
-                                              
   };
 };
 
@@ -42,4 +41,3 @@ export const fetchCasesByStateIfNeeded = () => {
     }
   };
 };
-
