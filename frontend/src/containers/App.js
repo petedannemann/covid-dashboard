@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Bar } from "@nivo/bar";
+import { ResponsiveBar } from "@nivo/bar";
 
 import { fetchCaseCountIfNeeded } from "../store/caseCount/actionCreators";
 import { fetchCasesByStateIfNeeded } from "../store/casesByState/actionCreators";
@@ -31,14 +31,12 @@ class App extends Component {
 
   casesByStateBarChart() {
     return (
-      <div style={{display: "inline-block"}}>
+        <div style={{display: "inline-block", height: "800px", width: "50%"}}>
         <h2>Cases By State</h2>
-        <Bar
+        <ResponsiveBar
           data={this.props.casesByState.data}
           keys={["number_of_cases"]}
           indexBy="state"
-          height={800}
-          width={500}
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
           padding={0.3}
           layout="horizontal"
@@ -65,16 +63,13 @@ class App extends Component {
   }
 
   deathsByStateBarChart() {
-    console.log(this.props.deathsByState)
     return (
-      <div style={{display: "inline-block"}}>
+        <div style={{display: "inline-block", height: "800px", width: "50%"}}>
         <h2>Deaths By State</h2>
-        <Bar
+        <ResponsiveBar
           data={this.props.deathsByState.data}
           keys={["number_of_deaths"]}
           indexBy="state"
-          height={800}
-          width={500}
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
           padding={0.3}
           layout="horizontal"
