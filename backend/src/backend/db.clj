@@ -20,12 +20,21 @@
       first))
 
 (defn get-cases-by-state []
-  (->> (jdbc/query pg-db
+  (-> (jdbc/query pg-db
                    ["SELECT
                        state,
                        SUM(cases) AS number_of_cases
                      FROM covid.nytimes_us_counties
                      GROUP BY state
                      ORDER BY number_of_cases"])))
+
+(defn get-deaths-by-state []
+  (-> (jdbc/query pg-db
+                   ["SELECT
+                       state,
+                       SUM(deaths) AS number_of_deaths
+                     FROM covid.nytimes_us_counties
+                     GROUP BY state
+                     ORDER BY number_of_deaths"])))
 
 #_(map #(update-in % [:data] json/read-str))

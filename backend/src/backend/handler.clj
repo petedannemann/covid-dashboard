@@ -13,12 +13,16 @@
 (defn case-count [request]
   (response (db/get-case-count)))
 
+(defn deaths-by-state [request]
+  (response (db/get-deaths-by-state)))
+
 (defn death-count [request]
   (response (db/get-death-count)))
 
 (defroutes app-routes
   (GET "/cases-by-state" [] cases-by-state)
   (GET "/case-count" [] case-count)
+  (GET "/deaths-by-state" [] deaths-by-state)
   (GET "/death-count" [] death-count)
   (route/resources "/")
   (route/not-found "Not Found"))
