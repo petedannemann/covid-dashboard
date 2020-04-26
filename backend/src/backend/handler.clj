@@ -19,11 +19,19 @@
 (defn death-count [request]
   (response (db/get-death-count)))
 
+(defn cases-over-time [request]
+  (response [{:id "all" :data (db/get-cases-over-time)}]))
+
+(defn deaths-over-time [request]
+  (response [{:id "all" :data (db/get-deaths-over-time)}]))
+
 (defroutes app-routes
   (GET "/cases-by-state" [] cases-by-state)
   (GET "/case-count" [] case-count)
   (GET "/deaths-by-state" [] deaths-by-state)
   (GET "/death-count" [] death-count)
+  (GET "/cases-over-time" [] cases-over-time)
+  (GET "/deaths-over-time" [] deaths-over-time)
   (route/resources "/")
   (route/not-found "Not Found"))
 
