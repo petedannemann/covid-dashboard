@@ -29,14 +29,30 @@ class App extends Component {
 
   casesByStateBarChart() {
     return (
-      <div>
+        <div style={{"width": "50%"}}>
+        <h2>Cases By State</h2>
         <Bar
-          data={this.props.casesByState.data}
-          keys={["number_of_cases"]}
-          indexBy="state"
-          height={300}
-          width={800}
-          colors={{ scheme: "nivo" }}
+      data={this.props.casesByState.data}
+      keys={["number_of_cases"]}
+      indexBy="state"
+      height={800}
+      width={500}
+      margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
+      padding={0.3}
+      layout='horizontal'
+      enableGridX={true}
+      enableGridY={false}
+      enableLabel={false}
+      borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+      axisBottom={{
+        tickRotation: -90,
+        legend: "Number of Cases",
+        legendPosition: 'middle',
+        legendOffset: 75
+      }}
+      tooltip={function(data) {
+        return <p>{data.value} Cases Reported in {data.indexValue}</p>
+      }}
         />
       </div>
     );
