@@ -62,7 +62,7 @@ class App extends Component {
               </p>
             );
           }}
-         />
+        />
       </div>
     );
   }
@@ -103,7 +103,7 @@ class App extends Component {
   casesOverTimeLineChart() {
     return (
       <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
-        <h2>Cases Over Time</h2>
+        <h2>New Cases Over Time</h2>
         <ResponsiveLine
           data={this.props.casesOverTime.data}
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
@@ -112,7 +112,7 @@ class App extends Component {
             tickRotation: -90,
           }}
           axisLeft={{
-            legend: "Number of Cases",
+            legend: "Number of New Cases",
             legendPosition: "middle",
             legendOffset: -75,
           }}
@@ -125,7 +125,7 @@ class App extends Component {
   deathsOverTimeLineChart() {
     return (
       <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
-        <h2>Deaths Over Time</h2>
+        <h2>New Deaths Over Time</h2>
         <ResponsiveLine
           data={this.props.deathsOverTime.data}
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
@@ -134,7 +134,7 @@ class App extends Component {
             tickRotation: -90,
           }}
           axisLeft={{
-            legend: "Number of Deaths",
+            legend: "Number of New Deaths",
             legendPosition: "middle",
             legendOffset: -75,
           }}
