@@ -5745,7 +5745,8 @@
             "valid-replication-keys": [
               "git_last_modified"
             ],
-            "inclusion": "available"
+            "inclusion": "available",
+            "selected": true
           }
         },
         {

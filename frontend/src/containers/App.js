@@ -55,14 +55,14 @@ class App extends Component {
             legendPosition: "middle",
             legendOffset: 75,
           }}
-          tooltip={function (data) {
+          tooltip={(data) => {
             return (
               <p>
                 {data.value} Cases Reported in {data.indexValue}
               </p>
             );
           }}
-        />
+         />
       </div>
     );
   }
@@ -88,7 +88,7 @@ class App extends Component {
             legendPosition: "middle",
             legendOffset: 75,
           }}
-          tooltip={function (data) {
+          tooltip={(data) => {
             return (
               <p>
                 {data.value} Deaths Reported in {data.indexValue}
@@ -102,46 +102,46 @@ class App extends Component {
 
   casesOverTimeLineChart() {
     return (
-        <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
-          <h2>Cases Over Time</h2>
+      <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
+        <h2>Cases Over Time</h2>
         <ResponsiveLine
-      data={this.props.casesOverTime.data}
-      margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
-      padding={0.3}
-      axisBottom={{
-        tickRotation: -90,
-      }}
-      axisLeft={{
-        legend: "Number of Cases",
-        legendPosition: "middle",
-        legendOffset: -75
-      }}
-      useMesh={true}
-      />
-        </div>
-    )
+          data={this.props.casesOverTime.data}
+          margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
+          padding={0.3}
+          axisBottom={{
+            tickRotation: -90,
+          }}
+          axisLeft={{
+            legend: "Number of Cases",
+            legendPosition: "middle",
+            legendOffset: -75,
+          }}
+          useMesh={true}
+        />
+      </div>
+    );
   }
 
   deathsOverTimeLineChart() {
     return (
-        <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
-          <h2>Deaths Over Time</h2>
+      <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
+        <h2>Deaths Over Time</h2>
         <ResponsiveLine
-      data={this.props.deathsOverTime.data}
-      margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
-      padding={0.3}
-      axisBottom={{
-        tickRotation: -90,
-      }}
-      axisLeft={{
-        legend: "Number of Deaths",
-        legendPosition: "middle",
-        legendOffset: -75
-      }}
-      useMesh={true}
-      />
-        </div>
-    )
+          data={this.props.deathsOverTime.data}
+          margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
+          padding={0.3}
+          axisBottom={{
+            tickRotation: -90,
+          }}
+          axisLeft={{
+            legend: "Number of Deaths",
+            legendPosition: "middle",
+            legendOffset: -75,
+          }}
+          useMesh={true}
+        />
+      </div>
+    );
   }
 
   render() {
@@ -155,10 +155,10 @@ class App extends Component {
         <div id="bar-chart-container">
           {this.casesByStateBarChart()}
           {this.deathsByStateBarChart()}
-      </div>
+        </div>
         <div id="line-chart-container">
-        {this.casesOverTimeLineChart()}
-      {this.deathsOverTimeLineChart()}
+          {this.casesOverTimeLineChart()}
+          {this.deathsOverTimeLineChart()}
         </div>
       </div>
     );
@@ -166,7 +166,14 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { caseCount, casesByState, casesOverTime, deathCount, deathsByState, deathsOverTime } = state;
+  const {
+    caseCount,
+    casesByState,
+    casesOverTime,
+    deathCount,
+    deathsByState,
+    deathsOverTime,
+  } = state;
 
   return {
     caseCount,
