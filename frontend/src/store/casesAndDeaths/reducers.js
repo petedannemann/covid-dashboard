@@ -1,18 +1,18 @@
-import { REQUEST_CASES_OVER_TIME, RECEIVE_CASES_OVER_TIME } from "./actionCreators";
+import { REQUEST_CASES_AND_DEATHS, RECEIVE_CASES_AND_DEATHS } from "./actionCreators";
 
-const casesOverTime = (
+const casesAndDeaths = (
   state = {
     isFetching: false,
-    data: [],
+    data: null,
   },
   action
 ) => {
   switch (action.type) {
-    case REQUEST_CASES_OVER_TIME:
+    case REQUEST_CASES_AND_DEATHS:
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case RECEIVE_CASES_OVER_TIME:
+    case RECEIVE_CASES_AND_DEATHS:
       return Object.assign({}, state, {
         isFetching: false,
         data: action.data,
@@ -22,4 +22,4 @@ const casesOverTime = (
   }
 };
 
-export default casesOverTime;
+export default casesAndDeaths;

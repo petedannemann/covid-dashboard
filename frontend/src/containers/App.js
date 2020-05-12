@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 
-import { fetchCaseCountIfNeeded } from "../store/caseCount/actionCreators";
-import { fetchCasesByStateIfNeeded } from "../store/casesByState/actionCreators";
-import { fetchCasesOverTimeIfNeeded } from "../store/casesOverTime/actionCreators";
-import { fetchDeathCountIfNeeded } from "../store/deathCount/actionCreators";
-import { fetchDeathsByStateIfNeeded } from "../store/deathsByState/actionCreators";
-import { fetchDeathsOverTimeIfNeeded } from "../store/deathsOverTime/actionCreators";
+import { fetchCasesAndDeathsIfNeeded } from "../store/casesAndDeaths/actionCreators";
+
+import casesByStateSelector from "../store/casesByState/selectors";
+import caseCountSelector from "../store/caseCount/selectors";
+import casesOverTimeSelector from "../store/casesOverTime/selectors";
+import deathsByStateSelector from "../store/deathsByState/selectors";
+import deathCountSelector from "../store/deathCount/selectors";
+import deathsOverTimeSelector from "../store/deathsOverTime/selectors";
 
 import Indicator from "../components/Indicator";
 
@@ -18,20 +20,15 @@ import "./App.css";
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchCaseCountIfNeeded());
-    dispatch(fetchDeathCountIfNeeded());
-    dispatch(fetchCasesByStateIfNeeded());
-    dispatch(fetchCasesOverTimeIfNeeded());
-    dispatch(fetchDeathsByStateIfNeeded());
-    dispatch(fetchDeathsOverTimeIfNeeded());
+    dispatch(fetchCasesAndDeathsIfNeeded());
   }
 
   totalCasesIndicator() {
-    return <Indicator number={this.props.caseCount.number} text="Total Cases" />;
+    return <Indicator number={this.props.caseCount} text="Total Cases" />;
   }
 
   totalDeathsIndicator() {
-    return <Indicator number={this.props.deathCount.number} text="Total Deaths" />;
+    return <Indicator number={this.props.deathCount} text="Total Deaths" />;
   }
 
   casesByStateBarChart() {
@@ -39,7 +36,7 @@ class App extends Component {
       <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
         <h2>Cases By State</h2>
         <ResponsiveBar
-          data={this.props.casesByState.data}
+          data={this.props.casesByState}
           keys={["number_of_cases"]}
           indexBy="state"
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
@@ -72,7 +69,7 @@ class App extends Component {
       <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
         <h2>Deaths By State</h2>
         <ResponsiveBar
-          data={this.props.deathsByState.data}
+          data={this.props.deathsByState}
           keys={["number_of_deaths"]}
           indexBy="state"
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
@@ -105,7 +102,7 @@ class App extends Component {
       <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
         <h2>New Cases Over Time</h2>
         <ResponsiveLine
-          data={this.props.casesOverTime.data}
+          data={this.props.casesOverTime}
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
           padding={0.3}
           axisBottom={{
@@ -127,7 +124,7 @@ class App extends Component {
       <div style={{ display: "inline-block", height: "800px", width: "50%" }}>
         <h2>New Deaths Over Time</h2>
         <ResponsiveLine
-          data={this.props.deathsOverTime.data}
+          data={this.props.deathsOverTime}
           margin={{ top: 50, right: 10, bottom: 100, left: 150 }}
           padding={0.3}
           axisBottom={{
@@ -165,23 +162,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const {
-    caseCount,
-    casesByState,
-    casesOverTime,
-    deathCount,
-    deathsByState,
-    deathsOverTime,
-  } = state;
-
+function mapStateToProps(state, props) {
   return {
-    caseCount,
-    casesByState,
-    casesOverTime,
-    deathCount,
-    deathsByState,
-    deathsOverTime,
+    caseCount: caseCountSelector(state, props),
+    casesByState: casesByStateSelector(state, props),
+    casesOverTime: casesOverTimeSelector(state, props),
+    deathCount: deathCountSelector(state, props),
+    deathsByState: deathsByStateSelector(state, props),
+    deathsOverTime: deathsOverTimeSelector(state, props),
   };
 }
 
