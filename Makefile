@@ -5,6 +5,7 @@ docker-up:
 docker-down:
 	docker-compose down
 
+# db
 postgres-shell:
 	docker exec -it --user postgres covid-dashboard_postgres_1 psql
 

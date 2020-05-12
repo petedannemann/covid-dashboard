@@ -4,12 +4,8 @@ import { connect } from "react-redux";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 
-import { fetchCaseCountIfNeeded } from "../store/caseCount/actionCreators";
-import { fetchCasesByStateIfNeeded } from "../store/casesByState/actionCreators";
-import { fetchCasesOverTimeIfNeeded } from "../store/casesOverTime/actionCreators";
-import { fetchDeathCountIfNeeded } from "../store/deathCount/actionCreators";
-import { fetchDeathsByStateIfNeeded } from "../store/deathsByState/actionCreators";
-import { fetchDeathsOverTimeIfNeeded } from "../store/deathsOverTime/actionCreators";
+import { fetchCasesAndDeathsIfNeeded } from "../store/casesAndDeaths/actionCreators";
+import { caseCountSelector } from "../store/caseCount/selectors";
 
 import Indicator from "../components/Indicator";
 
@@ -18,16 +14,11 @@ import "./App.css";
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchCaseCountIfNeeded());
-    dispatch(fetchDeathCountIfNeeded());
-    dispatch(fetchCasesByStateIfNeeded());
-    dispatch(fetchCasesOverTimeIfNeeded());
-    dispatch(fetchDeathsByStateIfNeeded());
-    dispatch(fetchDeathsOverTimeIfNeeded());
+    dispatch(fetchCasesAndDeathsIfNeeded());
   }
 
   totalCasesIndicator() {
-    return <Indicator number={this.props.caseCount.number} text="Total Cases" />;
+    return <Indicator number={this.props.caseCount} text="Total Cases" />;
   }
 
   totalDeathsIndicator() {
@@ -165,9 +156,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   const {
-    caseCount,
     casesByState,
     casesOverTime,
     deathCount,
@@ -176,7 +166,7 @@ function mapStateToProps(state) {
   } = state;
 
   return {
-    caseCount,
+    caseCount: caseCountSelector(state, props),
     casesByState,
     casesOverTime,
     deathCount,

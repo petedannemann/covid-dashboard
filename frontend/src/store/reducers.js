@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import casesAndDeaths from "./casesAndDeaths/reducer";
 import caseCount from "./caseCount/reducer";
 import casesByState from "./casesByState/reducer";
 import casesOverTime from "./casesOverTime/reducer";
@@ -8,6 +9,7 @@ import deathsByState from "./deathsByState/reducer";
 import deathsOverTime from "./deathsOverTime/reducer";
 
 const appReducer = combineReducers({
+  casesAndDeaths,
   caseCount,
   casesByState,
   casesOverTime,
