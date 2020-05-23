@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 
+import DayPicker, { DateUtils } from "react-day-picker";
+import "react-day-picker/lib/style.css";
+
 import { fetchCasesAndDeathsIfNeeded } from "../store/casesAndDeaths/actionCreators";
 import { selectStates } from "../store/states/actionCreators";
 
@@ -21,6 +24,24 @@ import Indicator from "../components/Indicator";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.onDayClick = this.onDayClick.bind(this);
+    this.handleResetClick = this.handleResetClick.bind(this);
+    this.state = this.getInitialState();
+  }
+
+  getInitialState() {
+    return {
+      from: undefined,
+      to: undefined,
+    };
+  }
+
+  handleResetClick() {
+    this.setState(this.getInitialState());
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCasesAndDeathsIfNeeded());
@@ -34,6 +55,11 @@ class App extends Component {
     };
 
     this.props.dispatch(selectStates(selectedStates));
+  }
+
+  onDayClick(day) {
+    const range = DateUtils.addDayToRange(day, this.state);
+    this.setState(range);
   }
 
   totalCasesIndicator() {
@@ -155,6 +181,7 @@ class App extends Component {
   }
 
   render() {
+    const { from, to } = this.state;
     return (
       <div className="App">
         <h1>COVID-19 Dashboard</h1>
@@ -162,6 +189,25 @@ class App extends Component {
           <Dropdown
             items={this.props.states}
             onChange={(e) => this.onStateDropdownChange(e)}
+          />
+          <p>
+            {!from && !to && "Please select the first day."}
+            {from && !to && "Please select the last day."}
+            {from &&
+              to &&
+              `Selected from ${from.toLocaleDateString()} to
+                ${to.toLocaleDateString()}`}{" "}
+            {from && to && (
+              <button className="link" onClick={this.handleResetClick}>
+                Reset
+              </button>
+            )}
+          </p>
+          <DayPicker
+            numberOfMonths={2}
+            selectedDays={[from, { from, to }]}
+            modifiers={{ start: from, end: to }}
+            onDayClick={this.onDayClick}
           />
         </div>
         <div id="indicator-container">
