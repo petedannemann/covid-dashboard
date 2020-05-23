@@ -1,14 +1,10 @@
 import { createSelector } from "reselect";
 
-import { casesAndDeathsSelector } from "../casesAndDeaths/selectors";
+import casesAndDeathsSelector from "../casesAndDeaths/selectors";
 
 const deathsOverTimeSelector = createSelector(
   casesAndDeathsSelector,
   (casesAndDeathsData) => {
-    if (casesAndDeathsData === null) {
-      return [{ id: "all", data: [] }];
-    }
-
     const deathsOverTimeCounter = casesAndDeathsData.reduce((acc, currentValue) => {
       const { date, new_deaths } = currentValue;
       if (date in acc) {

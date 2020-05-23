@@ -3,7 +3,8 @@ import { REQUEST_CASES_AND_DEATHS, RECEIVE_CASES_AND_DEATHS } from "./actionCrea
 const casesAndDeaths = (
   state = {
     isFetching: false,
-    data: null,
+    data: [],
+    receivedAt: null,
   },
   action
 ) => {
@@ -16,6 +17,7 @@ const casesAndDeaths = (
       return Object.assign({}, state, {
         isFetching: false,
         data: action.data,
+        receivedAt: new Date(),
       });
     default:
       return state;

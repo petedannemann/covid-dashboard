@@ -5,6 +5,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 
 import { fetchCasesAndDeathsIfNeeded } from "../store/casesAndDeaths/actionCreators";
+import { selectStates } from "../store/states/actionCreators";
 
 import casesByStateSelector from "../store/casesByState/selectors";
 import caseCountSelector from "../store/caseCount/selectors";
@@ -20,10 +21,6 @@ import Indicator from "../components/Indicator";
 import "./App.css";
 
 class App extends Component {
-  state = {
-    selectedStates: null,
-  };
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCasesAndDeathsIfNeeded());
@@ -32,9 +29,11 @@ class App extends Component {
   onStateDropdownChange(e) {
     const options = e.target.options;
     const selected = [...options].filter((option) => option.selected);
-    const selectedStates = selected.map((option) => option.value);
+    const selectedStates = {
+      data: selected.map((option) => option.value)
+    }
 
-    this.setState({ selectedStates });
+    this.props.dispatch(selectStates(selectedStates))
   }
 
   totalCasesIndicator() {

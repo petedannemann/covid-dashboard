@@ -26,7 +26,7 @@ const fetchCasesAndDeaths = () => {
 };
 
 const shouldFetchCasesAndDeaths = (state) => {
-  if (!state.casesAndDeaths.data) {
+  if (state.casesAndDeaths.data.length === 0) {
     return true;
   } else if (state.casesAndDeaths.isFetching) {
     return false;

@@ -1,14 +1,10 @@
 import { createSelector } from "reselect";
 
-import { casesAndDeathsSelector } from "../casesAndDeaths/selectors";
+import casesAndDeathsSelector from "../casesAndDeaths/selectors";
 
 const deathsByStateSelector = createSelector(
   casesAndDeathsSelector,
   (casesAndDeathsData) => {
-    if (casesAndDeathsData === null) {
-      return [];
-    }
-
     const deathsByStateCounter = casesAndDeathsData.reduce((acc, currentValue) => {
       const { state, new_deaths } = currentValue;
       if (state in acc) {
