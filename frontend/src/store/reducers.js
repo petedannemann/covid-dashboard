@@ -5,7 +5,7 @@ import selectedStates from "./states/reducers";
 
 const appReducer = combineReducers({
   casesAndDeaths,
-  selectedStates
+  selectedStates,
 });
 
 const rootReducer = (state, action) => {

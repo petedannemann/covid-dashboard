@@ -20,8 +20,7 @@ const activeCasesAndDeathsSelector = createSelector(
     if (activeStates === null) {
       return casesAndDeaths;
     }
-    console.log(activeStates)
-    
+
     return casesAndDeaths.filter((currentCaseAndDeath) => {
       const currentState = currentCaseAndDeath.state;
       return activeStates.includes(currentState);

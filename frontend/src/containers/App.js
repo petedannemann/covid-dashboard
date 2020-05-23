@@ -30,10 +30,10 @@ class App extends Component {
     const options = e.target.options;
     const selected = [...options].filter((option) => option.selected);
     const selectedStates = {
-      data: selected.map((option) => option.value)
-    }
+      data: selected.map((option) => option.value),
+    };
 
-    this.props.dispatch(selectStates(selectedStates))
+    this.props.dispatch(selectStates(selectedStates));
   }
 
   totalCasesIndicator() {
