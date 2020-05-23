@@ -5,6 +5,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 
 import { fetchCasesAndDeathsIfNeeded } from "../store/casesAndDeaths/actionCreators";
+import { selectStates } from "../store/states/actionCreators";
 
 import casesByStateSelector from "../store/casesByState/selectors";
 import caseCountSelector from "../store/caseCount/selectors";
@@ -12,7 +13,9 @@ import casesOverTimeSelector from "../store/casesOverTime/selectors";
 import deathsByStateSelector from "../store/deathsByState/selectors";
 import deathCountSelector from "../store/deathCount/selectors";
 import deathsOverTimeSelector from "../store/deathsOverTime/selectors";
+import statesSelector from "../store/states/selectors";
 
+import Dropdown from "../components/Dropdown";
 import Indicator from "../components/Indicator";
 
 import "./App.css";
@@ -21,6 +24,16 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCasesAndDeathsIfNeeded());
+  }
+
+  onStateDropdownChange(e) {
+    const options = e.target.options;
+    const selected = [...options].filter((option) => option.selected);
+    const selectedStates = {
+      data: selected.map((option) => option.value),
+    };
+
+    this.props.dispatch(selectStates(selectedStates));
   }
 
   totalCasesIndicator() {
@@ -145,6 +158,12 @@ class App extends Component {
     return (
       <div className="App">
         <h1>COVID-19 Dashboard</h1>
+        <div id="filter-container">
+          <Dropdown
+            items={this.props.states}
+            onChange={(e) => this.onStateDropdownChange(e)}
+          />
+        </div>
         <div id="indicator-container">
           {this.totalCasesIndicator()}
           {this.totalDeathsIndicator()}
@@ -170,6 +189,7 @@ function mapStateToProps(state, props) {
     deathCount: deathCountSelector(state, props),
     deathsByState: deathsByStateSelector(state, props),
     deathsOverTime: deathsOverTimeSelector(state, props),
+    states: statesSelector(state, props),
   };
 }
 

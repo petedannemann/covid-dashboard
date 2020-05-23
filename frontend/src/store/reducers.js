@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 
 import casesAndDeaths from "./casesAndDeaths/reducers";
+import selectedStates from "./states/reducers";
 
 const appReducer = combineReducers({
   casesAndDeaths,
+  selectedStates,
 });
 
 const rootReducer = (state, action) => {

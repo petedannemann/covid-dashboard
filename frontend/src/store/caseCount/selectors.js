@@ -1,9 +1,9 @@
 import { createSelector } from "reselect";
 
-import { casesAndDeathsSelector } from "../casesAndDeaths/selectors";
+import casesAndDeathsSelector from "../casesAndDeaths/selectors";
 
 const caseCountSelector = createSelector(casesAndDeathsSelector, (casesAndDeathsData) => {
-  if (casesAndDeathsData === null) {
+  if (casesAndDeathsData.length === 0) {
     return null;
   }
   return casesAndDeathsData.reduce((acc, currentValue) => {
